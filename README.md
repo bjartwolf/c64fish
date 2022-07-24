@@ -1,9 +1,6 @@
-Ant
+Fish
 ===
 
-C64 implementation of [Langton's Ant](http://en.wikipedia.org/wiki/Langton's_ant) in 6502 Assembler
+C64 implementation of Fish and tesselations 
 
-![screenshot](https://raw.github.com/bjartwolf/Ant/master/screenshot.png)
-
-Originally developed using Vintage Studio https://github.com/moozzyk/VintageStudio
-and 64TASS, but migrating to Kick Assembler and Retro Studio.
+![screenshot](https://raw.github.com/bjartwolf/c64fish/master/screenshot.png)

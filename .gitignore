@@ -1,6 +1,7 @@
 *.suo
 *.prg
 /tools/
+/bin/
 Main.dbg
 Main.sym
 Main.vs

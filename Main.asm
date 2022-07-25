@@ -13,9 +13,9 @@ start:
 loop:
     lda FISH,x 
     sta SCREEN,x   
-    sta SCREEN+255,x   
-    sta SCREEN+2*255,x   
-    sta SCREEN+3*255,x   
+    sta SCREEN+256,x   
+    sta SCREEN+2*256,x   
+    sta SCREEN+3*256,x   
     cpx #0
     dex                  
     beq end                  

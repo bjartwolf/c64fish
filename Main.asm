@@ -1,27 +1,43 @@
 *= $0801 "Basic Upstart"
 BasicUpstart(start) 
 
-.const CHARSET = $3800 
-.const SCREEN = $0400
 .const FISH = $6000
+.const SCREENMSB = $04
+.const SCREENLSB = $00
+.const CHARMSB = $60
+.const CHARLSB = $00
+.const CHARSET = $3800
+.const ZSCREEN = $fb
+.const ZCHAR = $fd
+
 *= $0810 "Program"
 start:
     lda $d018
     ora #$0f       
     sta $d018
-    ldx #0 
-loop:
-    lda FISH,x 
-    sta SCREEN,x
-    lda FISH+256,x 
-    sta SCREEN+256,x
-    lda FISH+256*2,x 
-    sta SCREEN+256*2,x
-    lda FISH+256*3,x 
-    sta SCREEN+256*3,x
+    
+    lda #CHARLSB
+    sta ZCHAR
+    lda #CHARMSB
+    sta ZCHAR+1
+    
+    lda #SCREENLSB
+    sta ZSCREEN
+    lda #SCREENMSB
+    sta ZSCREEN+1 
+
+    ldx #4 // We need to loop four times to cover the 250*4=1000 values (we copy 1024, but don't care...)
+oloop:
+    ldy #0 // We count down from 0, so it will be 0,255,254 and then stop at 0
+iloop:
+    lda (ZCHAR),y // Indirect lookup using zeropage
+    sta (ZSCREEN),y
+    dey
+    bne iloop 
+    inc ZSCREEN+1 // When we have looped 256 values, we count the MSBs up
+    inc ZCHAR+1   // by one to move to the next values... 
     dex 
-    beq end                  
-    jmp loop
+    bne oloop 
 end:
     nop
     jmp end

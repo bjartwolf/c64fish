@@ -1,4 +1,4 @@
-.var music = LoadSid("Manta-Mania.sid")
+.var music = LoadSid("sanction.sid")
 *= $0801 "Basic Upstart"
 BasicUpstart(start) 
 

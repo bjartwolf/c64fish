@@ -1,4 +1,4 @@
-.var music = LoadSid("Digger.sid")
+.var music = LoadSid("Manta-Mania.sid")
 *= $0801 "Basic Upstart"
 BasicUpstart(start) 
 
@@ -13,6 +13,29 @@ BasicUpstart(start)
 
 *= $0810 "Program"
 start:
+    lda #$00
+    sta $d020
+    sta $d021
+ 
+    ldx #0
+    ldy #0
+    lda #music.startSong-1
+    jsr music.init
+    sei
+    lda #<irq1
+    sta $0314
+    lda #>irq1
+    sta $0315
+    asl $d019
+    lda #$7b
+    sta $dc0d
+    lda #$81
+    sta $d01a
+    lda #$1b
+    sta $d011
+    lda #$80
+    sta $d012
+    cli
     lda $d018
     ora #$0f       
     sta $d018
@@ -77,6 +100,10 @@ irq1:
         tax
         pla
         rti
+
+*=music.location "Music"
+.fill music.size, music.getData(i)
+
 
 *= CHARSET "Charset"
 charset_data:

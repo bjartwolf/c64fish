@@ -1,3 +1,4 @@
+.var music = LoadSid("Digger.sid")
 *= $0801 "Basic Upstart"
 BasicUpstart(start) 
 
@@ -39,8 +40,7 @@ iloop:
     dex 
     bne oloop 
 end:
-    nop
-    jmp end
+    jmp * 
 
 *= CHARSET "Charset"
 charset_data:
